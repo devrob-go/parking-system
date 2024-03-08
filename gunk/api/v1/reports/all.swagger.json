@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "parking/gunk/api/v1/reports/all.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ReportService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/reports": {
+      "get": {
+        "summary": "Report",
+        "description": "Report record.",
+        "operationId": "ReportService_GetReport",
+        "responses": {
+          "200": {
+            "description": "Request executed successfully.",
+            "schema": {
+              "$ref": "#/definitions/reportsGetReportResponse"
+            }
+          },
+          "400": {
+            "description": "Returned when request is incorrect or malformed.",
+            "schema": {
+              "example": {
+                "code": 400,
+                "message": "request is incorrect or malformed"
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when not authorized to perform this action.",
+            "schema": {
+              "example": {
+                "code": 401,
+                "message": "not authorized"
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when not found.",
+            "schema": {
+              "example": {
+                "code": 404,
+                "message": "parking data not found"
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when internal server error.",
+            "schema": {
+              "example": {
+                "code": 500,
+                "message": "internal error"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "StartDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "Report"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "reportsGetReportResponse": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/reportsReportData"
+        }
+      },
+      "description": "UnParkVehicleResponse ..."
+    },
+    "reportsReport": {
+      "type": "object",
+      "properties": {
+        "TotalEarning": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TotalParked": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TotalHours": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "reportsReportData": {
+      "type": "object",
+      "properties": {
+        "Reports": {
+          "$ref": "#/definitions/reportsReport"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {
+      "name": "gunk",
+      "version": "1.0.0",
+      "dependencies": {
+        "swagger-combine": "^1.4.0"
+      }
+    },
+    "prefix": "/home/codemen-18/go/src/practice/parking/gunk"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "/home/codemen-18/.pnpm-store/v3",
+    "virtualStoreDir": "/home/codemen-18/go/src/practice/parking/gunk/node_modules/.pnpm"
+  },
+  "3 error pnpm": {
+    "err": {
+      "name": "pnpm",
+      "message": "Headless installation requires a pnpm-lock.yaml file",
+      "stack": "pnpm: Headless installation requires a pnpm-lock.yaml file\n    at _install (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:113407:21)\n    at mutateModules (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:113382:28)\n    at async Object.install (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:113340:24)\n    at async Object.handler [as default] (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:123972:31)\n    at async /usr/lib/node_modules/pnpm/dist/pnpm.cjs:133641:20\n    at async run (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:133616:34)\n    at async runPnpm (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:133826:5)\n    at async /usr/lib/node_modules/pnpm/dist/pnpm.cjs:133818:7"
+    }
+  }
+}

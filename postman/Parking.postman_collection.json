@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "dc1f6b0a-cbaf-486f-8385-9faf55156b54",
+		"name": "Parking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29087582"
+	},
+	"item": [
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "Crate New Parking Lot",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.status == \"OK\"){",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    pm.environment.set(\"parking-lot-id\", jsonData.Data.ParkingLot.ID);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"New Parking Lot\",\n    \"TotalSpace\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-base-url}}/parking-lot/create",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"parking-lot",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put A Slot in Maintenance Mode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"LotID\": \"{{parking-lot-id}}\",\n    \"SlotNumber\": 2,\n    \"Status\": \"Maintenance\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-base-url}}/parking-slot/update",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"parking-slot",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make A Slot Available",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"LotID\": \"{{parking-lot-id}}\",\n    \"SlotNumber\": 2,\n    \"Status\": \"Available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-base-url}}/parking-slot/update",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"parking-slot",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Report By Date",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api-base-url}}/reports?StartDate=2024-01-02T19:29:51.570987Z&EndDate=2024-03-09T19:29:51.570987Z",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"reports"
+							],
+							"query": [
+								{
+									"key": "StartDate",
+									"value": "2024-01-02T19:29:51.570987Z"
+								},
+								{
+									"key": "EndDate",
+									"value": "2024-03-09T19:29:51.570987Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Parking Lot Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api-base-url}}/parking-lot/{{parking-lot-id}}/details",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"parking-lot",
+								"{{parking-lot-id}}",
+								"details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Park Your Vehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.status == \"OK\"){",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    pm.environment.set(\"vehicle-id\", jsonData.Data.Vehicle.ID);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"LicensePlate\": \"N2345Q\",\n    \"LotID\": \"{{parking-lot-id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-base-url}}/vehicle/park",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"vehicle",
+								"park"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UnPark Your Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ID\": \"{{vehicle-id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-base-url}}/vehicle/unpark",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"vehicle",
+								"unpark"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "See All Parking Lot",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-base-url}}/parking-lot/list",
+							"host": [
+								"{{api-base-url}}"
+							],
+							"path": [
+								"parking-lot",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
